@@ -1,0 +1,76 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+import { action } from "@storybook/addon-actions";
+import { linkTo } from '@storybook/addon-links'
+import { someAddress } from '../data/addresses.js';
+import GridAddress from '../components/GridAddress.vue';
+import '../styles/style.less';
+
+<Meta
+  title="GridAddress"
+  component={GridAddress}
+  argTypes={{}}
+/>
+
+export const Template = (args, {argTypes}) => ({
+  props: Object.keys(argTypes),
+  components: { GridAddress },
+  template: '<GridAddress :address="address" :is-readonly="isReadonly" :is-selected="isSelected"></GridAddress>',
+});
+
+# GridAddress
+
+Contains an address, specifically designed for placing onto a grid.
+
+## Default
+
+The default grid item allows you to `edit`, `delete` and `select` an address.  Each of these
+actions causes the component to emit the edit the one of these key words with the `addressId` as an argument.
+
+<Canvas>
+  <Story 
+    name="Default"
+    args={{
+      address: someAddress,
+      isReadonly: false,
+      isSelected: false,
+      }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default"/>
+
+## Selected
+
+If an address has been selected, as well as altering the overall styling,
+then it will disable the `delete` button and replace the `select` button
+with an indication that it has been selected.
+
+<Canvas>
+  <Story name="Selected" args={{
+    address: someAddress,
+    isSelected: true,
+    isReadonly: false,
+  }}>
+  {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Selected"/>
+
+## Readonly
+
+If you don't want the user to be able to change any of these values
+then you can set the `is-readonly` property to `true`.
+
+<Canvas>
+  <Story name="Readonly" args={{
+    address: someAddress,
+    isSelected: false,
+    isReadonly: true,
+  }}>
+  {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Readonly"/>

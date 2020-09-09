@@ -1,0 +1,28 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
+import { action } from "@storybook/addon-actions";
+import { linkTo } from '@storybook/addon-links'
+import GridItemPlaceholder from '../components/GridItemPlaceholder.vue';
+import '../styles/style.less';
+
+
+<Meta
+  title="GridItemPlaceholder"
+  component={GridItemPlaceholder}
+  argTypes={{}}
+/>
+
+export const Template = (args, {argTypes}) => ({
+  props: Object.keys(argTypes),
+  components: { GridItemPlaceholder },
+  template: '<GridItemPlaceholder/>',
+});
+
+# GridItemPlaceholder
+
+A placeholder that you can click to add a new item to the grid.
+
+<Canvas>
+  <Story name="Default">
+    {Template.bind({})}
+  </Story>
+</Canvas>
